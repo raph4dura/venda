@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venda de Temperos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #container-table {
+            background-color: #4CAF50;
+            width: 100%;
+            height: 100%;
+        }
+        #content-table {
+            margin: 0 auto;
+            width: 80%;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        #topo {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        #topo table {
+            margin: 0 auto;
+            border-collapse: separate;
+            border-spacing: 10px;
+        }
+        #topo td {
+            border-radius: 5px;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        #topo td:hover {
+            background-color: #45a049;
+        }
+        #container {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        #boas-vindas-container {
+            background: url('https://images.pexels.com/photos/36445/rose-close-up-pink-flower.jpg?auto=compress&cs=tinysrgb&w=600') no-repeat center center;
+            background-size: cover;
+            opacity: 0.65; /* Opacidade da imagem de fundo */
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+        #boas-vindas {
+            border: 2px solid #000;
+            padding: 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 24px;
+            color: black;
+            position: relative;
+            z-index: 1;
+        }
+        #temperos-list {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+        }
+        #temperos-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            display: flex; /* Adicionei display flex para alinhar o botão de adicionar ao carrinho */
+            justify-content: space-between; /* Adicionei espaço entre os itens e os botões */
+            align-items: center; /* Alinhamento vertical */
+        }
+        .btn-adicionar {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            left: 500px;
+        }
+        .btn-adicionar:hover {
+            background-color: #45a049;
+        }
+        #carrinho {
+            display: none;
+            position: fixed;
+            bottom: 20px; /* Posição inferior */
+            right: 20px; /* Posição à direita */
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+            z-index: 999;
+        }
+        #carrinho h2 {
+            margin-bottom: 10px;
+        }
+        #itens-carrinho {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+        }
+        #itens-carrinho li {
+            margin-bottom: 5px;
+        }
+        #subtotal {
+            text-align: right;
+            margin-top: 20px;
+        }
+        #subtotal button {
+            margin-top: 10px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <table id="container-table">
+        <tr>
+            <td id="content-table">
+                <div id="topo">
+                    <table>
+                        <tr>
+                            <td><a href="index.html">Temperos</a></td>
+                            <td><a href="sobre.html">Sobre</a></td>
+                            <td><a href="contato.html">Contato</a></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="container">
+                    <div id="boas-vindas-container">
+                        <table style="margin: 0 auto;">
+                            <tr>
+                                <td id="boas-vindas">
+                                    <h2>Bem-vindo à nossa loja de temperos!</h2>
+                                    <p>Somos apaixonados por temperos e nos dedicamos a fornecer produtos de alta qualidade para tornar suas refeições ainda mais saborosas.</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h2>Lista de Compras</h2>
+                    <ul id="temperos-list">
+                        <li>
+                            Sal - R$ 2,50
+                            <button class="btn-adicionar" onclick="adicionarAoCarrinho('Sal')">Adicionar ao Carrinho</button>
+                        </li>
+                        <li>
+                            Pimenta - R$ 3,00
+                            <button class="btn-adicionar" onclick="adicionarAoCarrinho('Pimenta')">Adicionar ao Carrinho</button>
+                        </li>
+                        <li>
+                            Orégano - R$ 4,00
+                            <button class="btn-adicionar" onclick="adicionarAoCarrinho('Orégano')">Adicionar ao Carrinho</button>
+                        </li>
+                        <li>
+                            Curry - R$ 5,50
+                            <button class="btn-adicionar" onclick="adicionarAoCarrinho('Curry')">Adicionar ao Carrinho</button>
+                        </li>
+                        <!-- Adicione mais temperos conforme necessário -->
+                    </ul>
+                </div>
+                <div id="carrinho">
+                    <h2>Carrinho de Compras</h2>
+                    <ul id="itens-carrinho">
+                    </ul>
+                    <div id="subtotal">
+                        <p>Subtotal: <span id="subtotal-valor">R$ 0.00</span></p>
+                        <button onclick="limparCarrinho()">Limpar Carrinho</button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        let carrinho = document.getElementById('carrinho');
+
+        function adicionarAoCarrinho(tempero) {
+            alert(`"${tempero}" adicionado ao carrinho.`);
+            // Aqui você pode adicionar a lógica para adicionar o tempero ao carrinho de compras
+            const listaCarrinho = document.getElementById('itens-carrinho');
+            const novoItem = document.createElement('li');
+            novoItem.textContent = tempero;
+            listaCarrinho.insertBefore(novoItem, listaCarrinho.firstChild);
+            atualizarSubtotal();
+            mostrarCarrinho();
+        }
+
+        function atualizarSubtotal() {
+            const itensCarrinho = document.querySelectorAll('#itens-carrinho li');
+            let subtotal = 0;
+            itensCarrinho.forEach(item => {
+                const nome = item.textContent.trim();
+                switch (nome) {
+                    case 'Sal':
+                        subtotal += 2.5;
+                        break;
+                    case 'Pimenta':
+                        subtotal += 3.0;
+                        break;
+                    case 'Orégano':
+                        subtotal += 4.0;
+                        break;
+                    case 'Curry':
+                        subtotal += 5.5;
+                        break;
+                    // Adicione mais casos conforme necessário
+                }
+            });
+            document.getElementById('subtotal-valor').textContent = `R$ ${subtotal.toFixed(2)}`;
+        }
+
+        function limparCarrinho() {
+            const listaCarrinho = document.getElementById('itens-carrinho');
+            while (listaCarrinho.firstChild) {
+                listaCarrinho.removeChild(listaCarrinho.firstChild);
+            }
+            document.getElementById('subtotal-valor').textContent = 'R$ 0.00';
+            esconderCarrinho();
+        }
+
+        function mostrarCarrinho() {
+            carrinho.style.display = 'block';
+        }
+
+        function esconderCarrinho() {
+            carrinho.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
