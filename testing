@@ -76,20 +76,13 @@
                 };
             },
             created() {
-                // Obter itens adicionados do localStorage
+                // Carregar itens adicionados do localStorage
                 const storedItems = localStorage.getItem('addedItems');
                 if (storedItems) {
-                    this.addedItemsByCategory = JSON.parse(storedItems)
-                        .reduce((acc, item) => {
-                            if (!acc[item.category]) {
-                                acc[item.category] = [];
-                            }
-                            acc[item.category].push(item);
-                            return acc;
-                        }, {});
+                    this.addedItemsByCategory = JSON.parse(storedItems);
                 }
 
-                // Obter a observação do localStorage
+                // Carregar observação do localStorage
                 const storedObservation = localStorage.getItem('observation');
                 if (storedObservation) {
                     this.observation = storedObservation;
